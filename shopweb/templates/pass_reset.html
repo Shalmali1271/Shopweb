@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'assets/css/stylesheet.css' %}" rel="stylesheet">
+    <title>Reset Password</title>
+</head>
+<body>
+    <div class="login-wrap">
+        <div class="login-html">
+            <div class="login-form">
+                <h2>Reset Password</h2>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="group">
+                        <label for="email" class="label">Email</label>
+                        <input id="email" name="email" type="email" class="input">
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Send">
+                    </div>
+                    <div class="hr"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
