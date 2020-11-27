@@ -1,4 +1,5 @@
 {% load static %}
+
 {% static "assets/images" as baseUrl %}
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +59,11 @@ https://www.tooplate.com/view/2114-pixie
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+
             {% if user.is_authenticated %}
+            <li class="nav-item ">
+              <a class="nav-link" href="/cart">Cart</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/accounts/logout">Logout</a>
             </li>
@@ -105,8 +110,9 @@ https://www.tooplate.com/view/2114-pixie
                 	onfocus="if(this.value == '1') { this.value = ''; }" 
                     onBlur="if(this.value == '') { this.value = '1';}"
                     value="1">
-                <input type="submit" class="button" value="Order Now!">
-              </form>
+              </form>  
+                <a href="{{object.get_add_to_cart_url}}" class="button">Add to Cart</a> 
+                <a href="{{object.get_remove_from_cart_url}}" class="button">Remove from Cart</a>             
             </div>
           </div>
         </div>

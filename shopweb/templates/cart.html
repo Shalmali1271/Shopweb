@@ -1,6 +1,4 @@
 {% load static %}
-
-{% static "assets/images" as baseUrl %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,8 +10,8 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-    <title>BEAUTIFY</title>
-  
+    <title>Beautify - Cart</title>
+
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -21,7 +19,7 @@
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/tooplate-main.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/owl.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
 <!--
 Tooplate 2114 Pixie
 https://www.tooplate.com/view/2114-pixie
@@ -50,18 +48,17 @@ https://www.tooplate.com/view/2114-pixie
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href='/products'>Products</a>
+              <a class="nav-link" href="/index">Home</a>
             </li>
-            
-            {% if user.is_authenticated %}
             <li class="nav-item ">
-              <a class="nav-link" href="/cart">Cart</a>
+              <a class="nav-link" href="/products">Products</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/cart">Cart
+                    <span class="sr-only">(current)</span>
+                </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/accounts/logout">Logout</a>
@@ -70,7 +67,6 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="/accounts/register">Login</a>
             </li>
-            
             {% endif %}
           </ul>
         </div>
@@ -78,63 +74,40 @@ https://www.tooplate.com/view/2114-pixie
     </nav>
 
     <!-- Page Content -->
-    <!-- Banner Starts Here -->
-    <div class="banner">
+    <!-- Items Starts Here -->
+    <div class="featured-page">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="caption">
-              {% if user.is_authenticated %}
-              <h2>Hello, {{user.username}}</h2>
-              {% else %}
-              <h2>BEAUTIFY</h2>
-              {% endif %}
-              <div class="line-dec"></div>
-              <p>We are always happy to help! <br> Here , this website will help your cosmetics shopping Easy.<br>
-                Thank you for choosing us!</p>
-              <div class="main-button">
-                <a href="/products">Start Shopping!</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Banner Ends Here -->
-
-    <!-- Featured Starts Here -->
-    <div class="featured-items">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-4 col-sm-12">
             <div class="section-heading">
               <div class="line-dec"></div>
-              <h1>Featured Items</h1>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="owl-carousel owl-theme">
-              
-              {% for prod in object_list %}
-              {% if prod.freatured == True %}
-              <a href="{{ prod.get_absolute_url }}">
-                <div class="featured-item">
-                  
-                  <img src="{{prod.img.url}}" alt="Item 1">
-                  <h4>{{prod.name}}</h4>
-                  <h6>${{prod.price}}</h6>
-                  
-                </div>
-              </a>
-              {% endif %}
-              {% endfor %}
-              
+              <h1>Your Cart Items</h1>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Featred Ends Here -->
+  
+    <div class="featured container no-gutter">
+
+        <div class="row posts">
+            {% for prod in object.items.all %}
+            <div id="1" class="item new col-md-4">
+                <a href="{{ prod.item.get_absolute_url }}">
+                    <div class="featured-item">
+                        <img src="{{prod.item.img.url}}" alt="">
+                        <h4>{{prod.item.name}}</h4>
+                        <h6>${{prod.item.price}}</h6>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+
+    
+    <!-- Featred Page Ends Here -->
 
     <!-- Sub Footer Starts Here -->
     <div class="sub-footer">
@@ -159,6 +132,7 @@ https://www.tooplate.com/view/2114-pixie
     <!-- Additional Scripts -->
     <script src="{% static 'assets/js/custom.js' %}"></script>
     <script src="{% static 'assets/js/owl.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
 
 
     <script language = "text/Javascript"> 
