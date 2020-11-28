@@ -13,7 +13,7 @@ class Product(models.Model) :
     slug = models.SlugField()
     freatured = models.BooleanField()
     entry = models.DateField()
-    
+    style = models.TextField()
 
     def __str__(self):
       return self.name

@@ -18,8 +18,10 @@ class ItemDetailView(DetailView) :
     
 class ProductView(ListView) :
     model = Product
+    paginate_by = 6
     newest = Product.objects.order_by('entry')
     template_name = 'products.html'
+    
 
 class CartView(LoginRequiredMixin , View) :
     def get(self , *args , **kwargs) :
@@ -33,7 +35,7 @@ class CartView(LoginRequiredMixin , View) :
             messages.error(self.request,"You don't have order!")
             return redirect("/")
 
-@login_required
+@login_required(login_url = '/accounts/register')
 def add_to_cart(request , slug) : 
     item = get_object_or_404(Product , slug = slug)
     order_item , created = OrderItem.objects.get_or_create(user = request.user , item = item , ordered = False)
@@ -56,7 +58,7 @@ def add_to_cart(request , slug) :
         messages.info(request, "This item was added to your cart.")
     return redirect("shopweb:single_product" , slug = slug)
 
-@login_required
+@login_required(login_url = '/accounts/register')
 def remove_from_cart(request,slug) :
     item = get_object_or_404(Product , slug=slug)
     order_qs = Order.objects.filter(user = request.user , ordered=False)

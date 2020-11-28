@@ -95,10 +95,10 @@ https://www.tooplate.com/view/2114-pixie
     </div>
   
     <div class="featured container no-gutter">
-
+      
         <div class="row posts">
-            {% for prod in object_list %}
-            <div id="1" class="item new col-md-4">
+          {% for prod in object_list %}
+            <div id="1" class="item {{prod.style}} col-md-4">
               <a href="{{ prod.get_absolute_url }}">
                 <div class="featured-item">
                   <img src="{{prod.img.url}}" alt="">
@@ -107,25 +107,41 @@ https://www.tooplate.com/view/2114-pixie
                 </div>
               </a>
             </div>
-            {% endfor %}
-            
+          {% endfor %}
         </div>
+      
     </div>
 
-    <div class="page-navigation">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <ul>
-              <li class="current-page"><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% if is_paginated %}
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
     <!-- Featred Page Ends Here -->
 
     <!-- Sub Footer Starts Here -->
