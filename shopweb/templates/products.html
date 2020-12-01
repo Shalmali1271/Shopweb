@@ -143,6 +143,12 @@ https://www.tooplate.com/view/2114-pixie
       </nav>
       {% endif %}
     <!-- Featred Page Ends Here -->
+    <div>
+      {% for message in messages %}
+          <div class="hr"></div>
+          <h2>{{message}}</h2>
+      {% endfor %}
+    </div>
 
     <!-- Sub Footer Starts Here -->
     <div class="sub-footer">
