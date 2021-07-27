@@ -76,12 +76,13 @@ WSGI_APPLICATION = 'first.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shopweb',
-        'USER' : 'postgres',
-        'PASSWORD' : 'shal1271',
-        'HOST' : 'localhost'
+        'USER': 'newuser',
+        'PASSWORD': 'Shal1271',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
